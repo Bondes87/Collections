@@ -6,21 +6,43 @@ package com.shpp.dbondarenko;
  */
 public class Main {
     public static void main(String[] args) {
+      /* Queue queue= new PriorityQueue();
+        System.out.println(queue.add("ffbghb"));
+        System.out.println(queue.add("1"));*/
         BDSStack stack = new BDSStack();
         System.out.println(stack.push(1));
-        System.out.println(stack.peak());
         System.out.println(stack.push(2));
-        System.out.println(stack.peak());
+        System.out.println(stack.push(3));
+        System.out.println(stack.push(4));
         System.out.println(stack.push(5));
-        System.out.println(stack.peak());
         System.out.println(stack.push(6));
-        System.out.println(stack.peak());
+        System.out.println(stack.push(7));
         System.out.println(stack.push(8));
-        System.out.println(stack.peak());
+        System.out.println(stack.push(9));
+        System.out.println(stack.push(10));
+        System.out.println(stack.push(11));
+        System.out.println(stack.push(12));
+        System.out.println(stack.push(13));
+        System.out.println(stack.push(14));
+        System.out.println(stack.push(15));
+        System.out.println("search: " + stack.search(15));
+        // System.out.println(stack.peek());
+        //  System.out.println(stack.pop());
+        // System.out.println(stack.peek());
+        // System.out.println(stack.search(1));
+        // System.out.println(stack.peek());
+      /*   System.out.println(stack.push("gfdg"));
+        /*System.out.println(stack.peek());
+        System.out.println(stack.push(5));
+        System.out.println(stack.peek());
+        System.out.println(stack.push(6));
+        System.out.println(stack.peek());
+        System.out.println(stack.push(8));
+        System.out.println(stack.peek());
         System.out.println(stack.push(9));
         System.out.println(stack.empty());
         System.out.println(stack.search(0));
-        System.out.println(stack.pop());
+        System.out.println(stack.pop());*/
 
     }
 

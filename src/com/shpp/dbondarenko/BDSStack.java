@@ -10,25 +10,25 @@ import java.util.EmptyStackException;
 public class BDSStack<G> {
     private int sizeStack;
     private Object[] elements;
+    private int capacity;
 
     public BDSStack() {
-        sizeStack = 0;
+        capacity = 10;
+        elements = new Object[capacity];
     }
 
     public G push(G item) {
-        if (sizeStack == 0) {
-            elements = new Object[++sizeStack];
-            elements[sizeStack - 1] = item;
+        if (sizeStack < capacity) {
+            elements[sizeStack++] = item;
         } else {
-            Object[] array = new Object[sizeStack];
-            System.arraycopy(elements, 0, array, 0, sizeStack);
-            elements = new Object[++sizeStack];
-            System.arraycopy(array, 0, elements, 0, array.length);
-            elements[sizeStack - 1] = item;
+            Object[] copyElements = new Object[elements.length];
+            System.arraycopy(elements, 0, copyElements, 0, elements.length);
+            elements = new Object[capacity * 2];
+            System.arraycopy(copyElements, 0, elements, 0, copyElements.length);
+            elements[sizeStack++] = item;
         }
-       /* System.out.println(sizeStack);
-        System.out.println(elements.length);*/
         System.out.println(Arrays.toString(elements));
+
         return item;
     }
 
@@ -37,27 +37,20 @@ public class BDSStack<G> {
         if (sizeStack == 0) {
             throw new EmptyStackException();
         } else {
-            peak = elements(sizeStack - 1);
-            Object[] array = new Object[sizeStack - 1];
-            System.arraycopy(elements, 0, array, 0, sizeStack - 1);
-            elements = new Object[--sizeStack];
-            System.arraycopy(array, 0, elements, 0, sizeStack);
+            peak = elements(--sizeStack);
+            elements[sizeStack] = null;
         }
-        /*System.out.println(sizeStack);
-        System.out.println(elements.length);*/
         System.out.println(Arrays.toString(elements));
         return peak;
     }
 
-    public G peak() {
+    public G peek() {
         G peak;
         if (sizeStack == 0) {
             throw new EmptyStackException();
         } else {
             peak = elements(sizeStack - 1);
         }
-        /*System.out.println(sizeStack);
-        System.out.println(elements.length);*/
         System.out.println(Arrays.toString(elements));
         return peak;
     }
@@ -72,7 +65,7 @@ public class BDSStack<G> {
         } else {
             for (int i = 0; i < elements.length; i++) {
                 if (elements[i].equals(o)) {
-                    return ++i;
+                    return sizeStack - i;
                 }
             }
         }
