@@ -6,10 +6,16 @@ package com.shpp.dbondarenko;
  */
 public class Main {
     public static void main(String[] args) {
-      /* Queue queue= new PriorityQueue();
-        System.out.println(queue.add("ffbghb"));
-        System.out.println(queue.add("1"));*/
-        BDSStack stack = new BDSStack();
+        BDSQueue queue = new BDSQueue();
+        System.out.println(queue.add(1));
+        System.out.println(queue.add(2));
+        System.out.println(queue.element());
+        System.out.println(queue.pool());
+        System.out.println(queue.remove());
+        System.out.println(queue.pool());
+        System.out.println(queue.remove());
+        System.out.println(queue.pool());
+       /* BDSStack stack = new BDSStack();
         System.out.println(stack.push(1));
         System.out.println(stack.push(2));
         System.out.println(stack.push(3));
@@ -25,7 +31,7 @@ public class Main {
         System.out.println(stack.push(13));
         System.out.println(stack.push(14));
         System.out.println(stack.push(15));
-        System.out.println("search: " + stack.search(15));
+        System.out.println("search: " + stack.search(15));*/
         // System.out.println(stack.peek());
         //  System.out.println(stack.pop());
         // System.out.println(stack.peek());
