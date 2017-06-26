@@ -8,12 +8,13 @@ import java.util.EmptyStackException;
  * Created by Dmitro Bondarenko on 21.06.2017.
  */
 public class BDSStack<G> {
+    private static final int DEFAULT_CAPACITY = 10;
     private int sizeStack;
     private Object[] elements;
     private int capacity;
 
     public BDSStack() {
-        capacity = 10;
+        capacity = DEFAULT_CAPACITY;
         elements = new Object[capacity];
     }
 
