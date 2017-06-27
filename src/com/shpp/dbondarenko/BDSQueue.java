@@ -27,7 +27,8 @@ public class BDSQueue<G> {
             } else {
                 Object[] copyElements = new Object[elements.length];
                 System.arraycopy(elements, 0, copyElements, 0, elements.length);
-                elements = new Object[capacity + DEFAULT_CAPACITY];
+                capacity += DEFAULT_CAPACITY;
+                elements = new Object[capacity];
                 System.arraycopy(copyElements, 0, elements, 0, copyElements.length);
                 elements[sizeQueue++] = item;
             }

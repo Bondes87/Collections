@@ -1,6 +1,7 @@
 package com.shpp.dbondarenko;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * File: Main.java
@@ -8,30 +9,56 @@ import java.util.Arrays;
  */
 public class Main {
     public static void main(String[] args) {
-        BDSPriorityQueue queue = new BDSPriorityQueue();
-        System.out.println(queue.size());
-        /*System.out.println(queue.add(new Test(2, "Cvan")));
-        System.out.println(queue.add(new Test(1, "Basa")));
-        System.out.println(queue.add(new Test(1, "Afof")));
-        System.out.println(queue.add(new Test(3, "Aola")));
-        Test test = new Test(2, "Opla");
-        System.out.println(queue.add(test));
-        System.out.println(queue.contains(new Test(2, "Opla")));*/
-        System.out.println(queue.add("e"));
-        System.out.println(queue.add("o"));
-        System.out.println(queue.size());
-        System.out.println(queue.add("i"));
-        System.out.println(queue.add("o"));
-        Test test = new Test(2, "Opla");
-        System.out.println(queue.add("u"));
-        System.out.println(queue.contains("i"));
-        System.out.println(queue.size());
-        Object[] objects = queue.toArray();
-        System.out.println(Arrays.toString(objects));
-        queue.clear();
-        System.out.println(queue.size());
-        queue.clear();
-        System.out.println(Arrays.toString(objects));
+        BDSArrayList<Integer> arrayList = new BDSArrayList<>();
+        System.out.println(arrayList.add(1));
+        System.out.println(arrayList.add(2));
+        System.out.println(arrayList.add(3));
+        System.out.println(arrayList.add(4));
+        System.out.println(arrayList.add(5));
+        System.out.println(arrayList.add(2));
+        System.out.println(arrayList.add(7));
+        Integer integer = new Integer(10);
+        System.out.println(arrayList.remove(integer));
+        Object[] integers = arrayList.toArray();
+        System.out.println(Arrays.toString(integers));
+        arrayList.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return Integer.compare(o1, o2);
+            }
+        });
+        Object[] integers1 = arrayList.toArray();
+        System.out.println(Arrays.toString(integers1));
+
+        /*Test test = new Test(5,"e");
+        System.out.println(arrayList.add(test));
+        System.out.println(arrayList.add(new Test(1,"a")));
+        System.out.println(arrayList.add(new Test(2,"b")));
+        System.out.println(arrayList.add(new Test(3,"c")));
+        System.out.println(arrayList.add(new Test(4,"d")));
+        System.out.println(arrayList.remove(test));*/
+
+        //arrayList.add(5, 55);
+        /*System.out.println(arrayList.add(8));
+        System.out.println(arrayList.add(9));
+        System.out.println(arrayList.add(10));
+        System.out.println(arrayList.add(11));
+        System.out.println(arrayList.add(null));
+        System.out.println(arrayList.add(2));
+        System.out.println(arrayList.add(14));
+        System.out.println(arrayList.add(15));
+        System.out.println(arrayList.set(8, 78));
+        //arrayList.add(11, 55);
+        System.out.println(arrayList.add(16));
+        System.out.println(arrayList.add(17));
+        System.out.println(arrayList.add(18));
+        System.out.println(arrayList.size());
+        System.out.println(arrayList.contains(null));
+        System.out.println(arrayList.indexOf(5896));
+        System.out.println(arrayList.lastIndexOf(175447));
+        arrayList.clear();
+
+        System.out.println(arrayList.size());*/
         // System.out.println(queue.add(1));
        /* System.out.println(queue.add(1));
         System.out.println(queue.add(0));
