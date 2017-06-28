@@ -1,15 +1,32 @@
 package com.shpp.dbondarenko;
 
-import java.util.Arrays;
-
 /**
  * File: Main.java
  * Created by Dmitro Bondarenko on 20.06.2017.
  */
 public class Main {
     public static void main(String[] args) {
-        //LinkedList
-        BDSArrayList<Integer> arrayList = new BDSArrayList<>();
+        BDSLinkedList<Integer> list = new BDSLinkedList<>();
+        list.addLast(3);
+       /* list.addLast(4);
+        list.addLast(5);
+        list.addLast(6);
+        list.addLast(7);
+        list.addLast(8);
+        System.out.println(list.add(9));
+        list.addFirst(2);
+        list.addFirst(1);
+        list.addFirst(0);
+        System.out.println(list.add(10));
+        list.add(2,1452);
+        list.add(10,78);
+        System.out.println(list.get(2));*/
+        //System.out.println(Arrays.toString(list.toArray()));
+        System.out.println(list);
+        //System.out.println(list.getFirst());
+        //System.out.println(list.getLast());
+        System.out.println(list.peek());
+       /* BDSArrayList<Integer> arrayList = new BDSArrayList<>();
         System.out.println(arrayList.add(1));
         System.out.println(arrayList.add(2));
         System.out.println(arrayList.add(3));
@@ -27,7 +44,7 @@ public class Main {
         BDSArrayList<Integer> a = new BDSArrayList<>(arrayList);
         System.out.println(a.toString());
         System.out.println(arrayList.addAll(0, a));
-        System.out.println(arrayList.toString());
+        System.out.println(arrayList.toString());*/
         // ArrayList
         /*Test test = new Test(5,"e");
         System.out.println(arrayList.add(test));
