@@ -25,6 +25,11 @@ public class BDSArrayList<G> {
         elements = new Object[capacity];
     }
 
+    public BDSArrayList(BDSArrayList<? extends G> bdsArrayList) {
+        this(bdsArrayList.size());
+        addAll(bdsArrayList);
+    }
+
     @Override
     public String toString() {
         return "BDSArrayList{" +
@@ -39,7 +44,7 @@ public class BDSArrayList<G> {
             System.out.println(Arrays.toString(elements));
             return true;
         } else {
-            increaseCapacityOfArrayOfElements();
+            increaseCapacityOfArrayOfElements(DEFAULT_CAPACITY);
             elements[sizeArrayList++] = item;
             System.out.println(Arrays.toString(elements));
             return true;
@@ -47,7 +52,7 @@ public class BDSArrayList<G> {
     }
 
     public void add(int index, G item) {
-        if (index > sizeArrayList) {
+        if (index < 0 || index > sizeArrayList) {
             throw new IndexOutOfBoundsException();
         } else {
             if (index == sizeArrayList) {
@@ -57,11 +62,44 @@ public class BDSArrayList<G> {
                     insert(index, item);
                     System.out.println(Arrays.toString(elements));
                 } else {
-                    increaseCapacityOfArrayOfElements();
+                    increaseCapacityOfArrayOfElements(DEFAULT_CAPACITY);
                     insert(index, item);
                     System.out.println(Arrays.toString(elements));
                 }
             }
+        }
+    }
+
+    public boolean addAll(BDSArrayList<? extends G> bdsArrayList) {
+        if (bdsArrayList.isEmpty()) {
+            throw new NullPointerException();
+        } else {
+            int sizeBDSArrayList = bdsArrayList.size();
+            Object[] bdsArray = bdsArrayList.toArray();
+            increaseCapacityOfArrayOfElements(sizeBDSArrayList);
+            System.arraycopy(bdsArray, 0, elements, sizeArrayList, sizeBDSArrayList);
+            sizeArrayList += sizeBDSArrayList;
+            System.out.println(Arrays.toString(elements));
+            return true;
+        }
+    }
+
+    public boolean addAll(int index, BDSArrayList<? extends G> bdsArrayList) {
+        if (index < 0 || index > sizeArrayList) {
+            throw new IndexOutOfBoundsException();
+        } else if (bdsArrayList.isEmpty()) {
+            throw new NullPointerException();
+        } else {
+            int sizeBDSArrayList = bdsArrayList.size();
+            Object[] bdsArray = bdsArrayList.toArray();
+            increaseCapacityOfArrayOfElements(sizeBDSArrayList);
+            Object[] copyElementsAfterIndex = new Object[sizeArrayList + 1 - index];
+            System.arraycopy(elements, index, copyElementsAfterIndex, 0, sizeArrayList + 1 - index);
+            System.arraycopy(bdsArray, 0, elements, index, sizeBDSArrayList);
+            System.arraycopy(copyElementsAfterIndex, 0, elements, index + sizeBDSArrayList, copyElementsAfterIndex.length);
+            sizeArrayList += sizeBDSArrayList;
+            System.out.println(Arrays.toString(elements));
+            return true;
         }
     }
 
@@ -100,21 +138,7 @@ public class BDSArrayList<G> {
     }
 
     public boolean contains(G item) {
-        if (item == null) {
-            for (int i = 0; i < sizeArrayList; i++) {
-                if (elements[i] == null) {
-                    return true;
-                }
-            }
-            return false;
-        } else {
-            for (int i = 0; i < sizeArrayList; i++) {
-                if (item.equals(elements[i])) {
-                    return true;
-                }
-            }
-            return false;
-        }
+        return indexOf(item) != -1;
     }
 
     public int indexOf(G item) {
@@ -206,10 +230,10 @@ public class BDSArrayList<G> {
         return (G) elements[index];
     }
 
-    private void increaseCapacityOfArrayOfElements() {
+    private void increaseCapacityOfArrayOfElements(int valueOfIncreaseInCapacity) {
         Object[] copyElements = new Object[elements.length];
         System.arraycopy(elements, 0, copyElements, 0, elements.length);
-        capacity += DEFAULT_CAPACITY;
+        capacity += valueOfIncreaseInCapacity;
         elements = new Object[capacity];
         System.arraycopy(copyElements, 0, elements, 0, copyElements.length);
     }

@@ -1,7 +1,6 @@
 package com.shpp.dbondarenko;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * File: Main.java
@@ -9,27 +8,27 @@ import java.util.Comparator;
  */
 public class Main {
     public static void main(String[] args) {
+        //LinkedList
         BDSArrayList<Integer> arrayList = new BDSArrayList<>();
         System.out.println(arrayList.add(1));
         System.out.println(arrayList.add(2));
         System.out.println(arrayList.add(3));
         System.out.println(arrayList.add(4));
         System.out.println(arrayList.add(5));
-        System.out.println(arrayList.add(2));
+        System.out.println(arrayList.add(6));
         System.out.println(arrayList.add(7));
-        Integer integer = new Integer(10);
-        System.out.println(arrayList.remove(integer));
-        Object[] integers = arrayList.toArray();
-        System.out.println(Arrays.toString(integers));
-        arrayList.sort(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return Integer.compare(o1, o2);
-            }
-        });
+        System.out.println(arrayList.add(8));
+        System.out.println(arrayList.add(9));
+        System.out.println(arrayList.add(10));
+        System.out.println(arrayList.add(11));
+        System.out.println("contains " + arrayList.contains(7));
         Object[] integers1 = arrayList.toArray();
         System.out.println(Arrays.toString(integers1));
-
+        BDSArrayList<Integer> a = new BDSArrayList<>(arrayList);
+        System.out.println(a.toString());
+        System.out.println(arrayList.addAll(0, a));
+        System.out.println(arrayList.toString());
+        // ArrayList
         /*Test test = new Test(5,"e");
         System.out.println(arrayList.add(test));
         System.out.println(arrayList.add(new Test(1,"a")));
