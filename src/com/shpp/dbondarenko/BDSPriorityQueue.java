@@ -134,10 +134,6 @@ public class BDSPriorityQueue<G> extends BDSQueue<G> {
         return copyElement;
     }
 
-    public void sort(Comparator<? super G> comparator) {
-
-    }
-
     @SuppressWarnings("unchecked")
     private void sortArrayElements() {
         if (sizeQueue != 1) {
