@@ -152,20 +152,18 @@ public class BDSLinkedList<G> {
     }
 
     public G getFirst() {
-        G firstItem = peekFirst();
-        if (firstItem == null) {
+        if (sizeLinkedList == 0) {
             throw new NoSuchElementException();
         } else {
-            return firstItem;
+            return peekFirst();
         }
     }
 
     public G getLast() {
-        G lastItem = peekLast();
-        if (lastItem == null) {
+        if (sizeLinkedList == 0) {
             throw new NoSuchElementException();
         } else {
-            return lastItem;
+            return peekLast();
         }
     }
 

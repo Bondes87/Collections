@@ -33,6 +33,21 @@ public class BDSPriorityQueue<G> extends BDSQueue<G> {
         this.comparator = comparator;
     }
 
+    public BDSPriorityQueue(BDSPriorityQueue<? extends G> bdsPriorityQueue) {
+        if (bdsPriorityQueue == null) {
+            throw new NullPointerException();
+        } else {
+            initBDSPriorityQueue(bdsPriorityQueue);
+        }
+    }
+
+    @Override
+    public String toString() {
+        Object[] copyElement = new Object[sizeQueue];
+        System.arraycopy(elements, 0, copyElement, 0, sizeQueue);
+        return Arrays.toString(copyElement);
+    }
+
     public boolean offer(G item) {
         if (item == null) {
             return false;
@@ -132,6 +147,18 @@ public class BDSPriorityQueue<G> extends BDSQueue<G> {
         Object[] copyElement = new Object[sizeQueue];
         System.arraycopy(elements, 0, copyElement, 0, sizeQueue);
         return copyElement;
+    }
+
+    public Comparator<? super G> comparator() {
+        return comparator;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void initBDSPriorityQueue(BDSPriorityQueue<? extends G> bdsPriorityQueue) {
+        comparator = (Comparator<? super G>) bdsPriorityQueue.comparator();
+        elements = bdsPriorityQueue.toArray();
+        sizeQueue = bdsPriorityQueue.size();
+        capacity = bdsPriorityQueue.size() + DEFAULT_CAPACITY;
     }
 
     @SuppressWarnings("unchecked")

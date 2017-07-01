@@ -32,10 +32,17 @@ public class BDSArrayList<G> {
 
     @Override
     public String toString() {
-        return "BDSArrayList{" +
-                "sizeArrayList=" + sizeArrayList +
-                ", elements=" + Arrays.toString(elements) +
-                '}';
+        Object[] copyElement = new Object[sizeArrayList];
+        System.arraycopy(elements, 0, copyElement, 0, sizeArrayList);
+        return Arrays.toString(copyElement);
+    }
+
+    public Object clone() {
+        BDSArrayList<G> bdsArrayList = new BDSArrayList<>(sizeArrayList);
+        for (int i = 0; i < sizeArrayList; i++) {
+            bdsArrayList.add(getElement(i));
+        }
+        return bdsArrayList;
     }
 
     public boolean add(G item) {
@@ -94,9 +101,11 @@ public class BDSArrayList<G> {
             Object[] bdsArray = bdsArrayList.toArray();
             increaseCapacityOfArrayOfElements(sizeBDSArrayList);
             Object[] copyElementsAfterIndex = new Object[sizeArrayList + 1 - index];
-            System.arraycopy(elements, index, copyElementsAfterIndex, 0, sizeArrayList + 1 - index);
+            System.arraycopy(elements, index, copyElementsAfterIndex,
+                    0, sizeArrayList + 1 - index);
             System.arraycopy(bdsArray, 0, elements, index, sizeBDSArrayList);
-            System.arraycopy(copyElementsAfterIndex, 0, elements, index + sizeBDSArrayList, copyElementsAfterIndex.length);
+            System.arraycopy(copyElementsAfterIndex, 0, elements,
+                    index + sizeBDSArrayList, copyElementsAfterIndex.length);
             sizeArrayList += sizeBDSArrayList;
             System.out.println(Arrays.toString(elements));
             return true;
@@ -119,7 +128,7 @@ public class BDSArrayList<G> {
         if (index < 0 || index >= sizeArrayList) {
             throw new IndexOutOfBoundsException();
         } else {
-            return elements(index);
+            return getElement(index);
         }
     }
 
@@ -127,7 +136,7 @@ public class BDSArrayList<G> {
         if (index < 0 || index >= sizeArrayList) {
             throw new IndexOutOfBoundsException();
         } else {
-            G oldItem = elements(index);
+            G oldItem = getElement(index);
             elements[index] = item;
             return oldItem;
         }
@@ -137,11 +146,11 @@ public class BDSArrayList<G> {
         return sizeArrayList;
     }
 
-    public boolean contains(G item) {
+    public boolean contains(Object item) {
         return indexOf(item) != -1;
     }
 
-    public int indexOf(G item) {
+    public int indexOf(Object item) {
         if (item == null) {
             for (int i = 0; i < sizeArrayList; i++) {
                 if (elements[i] == null) {
@@ -159,7 +168,7 @@ public class BDSArrayList<G> {
         }
     }
 
-    public int lastIndexOf(G item) {
+    public int lastIndexOf(Object item) {
         if (item == null) {
             for (int i = sizeArrayList - 1; i > 0; i--) {
                 if (elements[i] == null) {
@@ -183,7 +192,8 @@ public class BDSArrayList<G> {
         } else {
             G deletedItem = get(index);
             Object[] copyElementsAfterIndex = new Object[sizeArrayList + 1 - index];
-            System.arraycopy(elements, index + 1, copyElementsAfterIndex, 0, sizeArrayList + 1 - index);
+            System.arraycopy(elements, index + 1, copyElementsAfterIndex,
+                    0, sizeArrayList + 1 - index);
             System.arraycopy(copyElementsAfterIndex, 0, elements, index, copyElementsAfterIndex.length);
             elements[sizeArrayList] = null;
             sizeArrayList--;
@@ -192,13 +202,14 @@ public class BDSArrayList<G> {
         }
     }
 
-    public boolean remove(G item) {
+    public boolean remove(Object item) {
         int indexItem = indexOf(item);
         if (indexItem != -1) {
             remove(indexItem);
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     public Object[] toArray() {
@@ -226,7 +237,7 @@ public class BDSArrayList<G> {
     }
 
     @SuppressWarnings("unchecked")
-    private G elements(int index) {
+    private G getElement(int index) {
         return (G) elements[index];
     }
 

@@ -30,7 +30,6 @@ public class BDSStack<G> {
             elements[sizeStack++] = item;
         }
         System.out.println(Arrays.toString(elements));
-
         return item;
     }
 

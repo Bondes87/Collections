@@ -1,14 +1,12 @@
 package com.shpp.dbondarenko;
 
-import java.util.Arrays;
-
 /**
  * File: Main.java
  * Created by Dmitro Bondarenko on 20.06.2017.
  */
 public class Main {
     public static void main(String[] args) {
-        BDSLinkedList<Integer> list = new BDSLinkedList<>();
+        /*BDSLinkedList<Integer> list = new BDSLinkedList<>();
         list.addLast(3);
         list.addLast(4);
         list.addLast(5);
@@ -45,26 +43,7 @@ public class Main {
         System.out.println(list1);
         @SuppressWarnings("unchecked")
         BDSLinkedList<Integer> list2 = (BDSLinkedList<Integer>) list1.clone();
-        System.out.println("list2" + list2);
-       /* BDSArrayList<Integer> arrayList = new BDSArrayList<>();
-        System.out.println(arrayList.add(1));
-        System.out.println(arrayList.add(2));
-        System.out.println(arrayList.add(3));
-        System.out.println(arrayList.add(4));
-        System.out.println(arrayList.add(5));
-        System.out.println(arrayList.add(6));
-        System.out.println(arrayList.add(7));
-        System.out.println(arrayList.add(8));
-        System.out.println(arrayList.add(9));
-        System.out.println(arrayList.add(10));
-        System.out.println(arrayList.add(11));
-        System.out.println("contains " + arrayList.contains(7));
-        Object[] integers1 = arrayList.toArray();
-        System.out.println(Arrays.toString(integers1));
-        BDSArrayList<Integer> a = new BDSArrayList<>(arrayList);
-        System.out.println(a.toString());
-        System.out.println(arrayList.addAll(0, a));
-        System.out.println(arrayList.toString());*/
+        System.out.println("list2" + list2);*/
         // ArrayList
         /*Test test = new Test(5,"e");
         System.out.println(arrayList.add(test));
