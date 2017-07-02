@@ -238,9 +238,11 @@ public class BDSLinkedList<G> {
     }
 
     public void clear() {
-        first = null;
-        last = null;
-        sizeLinkedList = 0;
+        if (sizeLinkedList > 0) {
+            first = null;
+            last = null;
+            sizeLinkedList = 0;
+        }
     }
 
     public boolean offerFirst(G item) {

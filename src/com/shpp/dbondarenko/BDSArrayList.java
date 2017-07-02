@@ -114,9 +114,8 @@ public class BDSArrayList<G> {
 
     public void clear() {
         if (sizeArrayList > 0) {
-            while (sizeArrayList > 0) {
-                elements[--sizeArrayList] = null;
-            }
+            sizeArrayList = 0;
+            elements = new Object[elements.length];
         }
     }
 
