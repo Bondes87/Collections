@@ -1,6 +1,5 @@
 package com.shpp.dbondarenko;
 
-import java.util.Arrays;
 import java.util.EmptyStackException;
 
 /**
@@ -29,7 +28,6 @@ public class BDSStack<G> {
             System.arraycopy(copyElements, 0, elements, 0, copyElements.length);
             elements[sizeStack++] = item;
         }
-        System.out.println(Arrays.toString(elements));
         return item;
     }
 
@@ -41,7 +39,6 @@ public class BDSStack<G> {
             peak = elements(--sizeStack);
             elements[sizeStack] = null;
         }
-        System.out.println(Arrays.toString(elements));
         return peak;
     }
 
@@ -52,7 +49,6 @@ public class BDSStack<G> {
         } else {
             peak = elements(sizeStack - 1);
         }
-        System.out.println(Arrays.toString(elements));
         return peak;
     }
 

@@ -63,7 +63,6 @@ public class BDSPriorityQueue<G> extends BDSQueue<G> {
                 elements[sizeQueue++] = item;
             }
             sortArrayElements();
-            System.out.println(Arrays.toString(elements));
             return true;
         }
     }
@@ -81,7 +80,6 @@ public class BDSPriorityQueue<G> extends BDSQueue<G> {
         if (sizeQueue == 0) {
             return null;
         } else {
-            System.out.println(Arrays.toString(elements));
             return (G) elements[0];
         }
     }
@@ -103,7 +101,6 @@ public class BDSPriorityQueue<G> extends BDSQueue<G> {
         } else {
             queueHead = (G) elements[0];
             System.arraycopy(elements, 1, elements, 0, elements.length - 1);
-            System.out.println(Arrays.toString(elements));
             return queueHead;
         }
     }
@@ -139,8 +136,6 @@ public class BDSPriorityQueue<G> extends BDSQueue<G> {
             }
             sizeQueue++;
         }
-        System.out.println(Arrays.toString(elements));
-        System.out.println(sizeQueue);
     }
 
     public Object[] toArray() {

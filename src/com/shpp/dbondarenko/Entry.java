@@ -19,11 +19,9 @@ public class Entry<K, V> {
 
     @Override
     public String toString() {
-        return "Entry{" +
-                "hash=" + hash +
-                ", key=" + key +
+        return "{" +
+                "key=" + key +
                 ", value=" + value +
-                ", next=" + next +
                 '}';
     }
 

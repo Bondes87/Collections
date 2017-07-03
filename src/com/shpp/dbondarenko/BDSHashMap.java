@@ -1,7 +1,5 @@
 package com.shpp.dbondarenko;
 
-import java.util.Arrays;
-
 /**
  * File: BDSHashMap.java
  * Created by Dmitro Bondarenko on 26.06.2017.
@@ -30,14 +28,24 @@ public class BDSHashMap<K, V> {
 
     @Override
     public String toString() {
-        return "BDSHashMap{" +
-                "sizeHashMap=" + sizeHashMap +
-                ", table=" + Arrays.toString(table) +
-                '}';
+        BDSArrayList<Entry<K, V>> bdsArrayList = new BDSArrayList<>();
+        for (Entry<K, V> entry : table) {
+            if (entry != null) {
+                do {
+                    bdsArrayList.add(entry);
+                } while ((entry = entry.getNext()) != null);
+            }
+        }
+        return bdsArrayList.toString();
     }
 
     public Object clone() {
-        BDSHashMap<K, V> bdsHashMap = new BDSHashMap<>(sizeHashMap);
+        BDSHashMap<K, V> bdsHashMap;
+        if (sizeHashMap < DEFAULT_CAPACITY) {
+            bdsHashMap = new BDSHashMap<>(DEFAULT_CAPACITY);
+        } else {
+            bdsHashMap = new BDSHashMap<>(sizeHashMap);
+        }
         for (Entry<K, V> aTable : table) {
             Entry<K, V> entry = aTable;
             if (entry != null) {

@@ -62,7 +62,6 @@ public class BDSLinkedList<G> {
             last = next;
         }
         sizeLinkedList++;
-        System.out.println(sizeLinkedList);
     }
 
     public void addFirst(G item) {
@@ -78,7 +77,6 @@ public class BDSLinkedList<G> {
             first = previous;
         }
         sizeLinkedList++;
-        System.out.println(sizeLinkedList);
     }
 
     public void add(int index, G item) {
@@ -94,7 +92,6 @@ public class BDSLinkedList<G> {
             previousNodeByIndex.setNext(newNodeByIndex);
             oldNodeByIndex.setPrevious(newNodeByIndex);
             sizeLinkedList++;
-            System.out.println(sizeLinkedList);
         }
     }
 

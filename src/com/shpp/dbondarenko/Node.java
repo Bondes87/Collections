@@ -17,11 +17,7 @@ public class Node<G> {
 
     @Override
     public String toString() {
-        return "Node{" +
-                "item=" + item +
-                ", next=" + next +
-                ", previous=" + previous +
-                '}';
+        return item.toString();
     }
 
     public G getItem() {

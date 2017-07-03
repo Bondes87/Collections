@@ -48,12 +48,10 @@ public class BDSArrayList<G> {
     public boolean add(G item) {
         if (sizeArrayList < capacity) {
             elements[sizeArrayList++] = item;
-            System.out.println(Arrays.toString(elements));
             return true;
         } else {
             increaseCapacityOfArrayOfElements(DEFAULT_CAPACITY);
             elements[sizeArrayList++] = item;
-            System.out.println(Arrays.toString(elements));
             return true;
         }
     }
@@ -67,11 +65,9 @@ public class BDSArrayList<G> {
             } else {
                 if (sizeArrayList < capacity - 1) {
                     insert(index, item);
-                    System.out.println(Arrays.toString(elements));
                 } else {
                     increaseCapacityOfArrayOfElements(DEFAULT_CAPACITY);
                     insert(index, item);
-                    System.out.println(Arrays.toString(elements));
                 }
             }
         }
@@ -86,7 +82,6 @@ public class BDSArrayList<G> {
             increaseCapacityOfArrayOfElements(sizeBDSArrayList);
             System.arraycopy(bdsArray, 0, elements, sizeArrayList, sizeBDSArrayList);
             sizeArrayList += sizeBDSArrayList;
-            System.out.println(Arrays.toString(elements));
             return true;
         }
     }
@@ -107,7 +102,6 @@ public class BDSArrayList<G> {
             System.arraycopy(copyElementsAfterIndex, 0, elements,
                     index + sizeBDSArrayList, copyElementsAfterIndex.length);
             sizeArrayList += sizeBDSArrayList;
-            System.out.println(Arrays.toString(elements));
             return true;
         }
     }
@@ -196,7 +190,6 @@ public class BDSArrayList<G> {
             System.arraycopy(copyElementsAfterIndex, 0, elements, index, copyElementsAfterIndex.length);
             elements[sizeArrayList] = null;
             sizeArrayList--;
-            System.out.println(Arrays.toString(elements));
             return deletedItem;
         }
     }

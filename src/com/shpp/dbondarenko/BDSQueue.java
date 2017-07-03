@@ -1,6 +1,5 @@
 package com.shpp.dbondarenko;
 
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 /**
@@ -32,7 +31,6 @@ public class BDSQueue<G> {
                 System.arraycopy(copyElements, 0, elements, 0, copyElements.length);
                 elements[sizeQueue++] = item;
             }
-            System.out.println(Arrays.toString(elements));
             return true;
         }
     }
@@ -50,7 +48,6 @@ public class BDSQueue<G> {
         if (sizeQueue == 0) {
             return null;
         } else {
-            System.out.println(Arrays.toString(elements));
             return (G) elements[0];
         }
     }
@@ -72,7 +69,6 @@ public class BDSQueue<G> {
         } else {
             queueHead = (G) elements[0];
             System.arraycopy(elements, 1, elements, 0, elements.length - 1);
-            System.out.println(Arrays.toString(elements));
             return queueHead;
         }
     }
