@@ -7,15 +7,22 @@ package com.shpp.dbondarenko;
 public class Main {
     public static void main(String[] args) {
         BDSHashMap<String, Integer> map = new BDSHashMap<>();
-        System.out.println(map.put("k", 1));
-        System.out.println(map.put("df", 6));
-        System.out.println(map.put("dffdfdf", 3));
+        //System.out.println(map.put("k", 1));
+        System.out.println(map.put("w", 7));
+        System.out.println(map.put("u", 8));
+       /* System.out.println(map.put("dffdfdf", 3));
         System.out.println(map.put("dfgdsgfgdf", 4));
         System.out.println(map.put("k", 4));
+        System.out.println(map.put(null, null));*/
         System.out.println(map.size());
         System.out.println(map);
-        System.out.println(map.isEmpty());
-        System.out.println(map.containsValue(1));
+        BDSHashMap<String, Integer> map1 = (BDSHashMap<String, Integer>) map.clone();
+        System.out.println(map1.size());
+        System.out.println(map1);
+       /* HashMap<Integer,String>hashMap = new HashMap<>();
+        for (Map.Entry<Integer, String> entry: hashMap.entrySet()){
+            entry.
+        }*/
     }
 
     static class Test implements Comparable<Test> {
