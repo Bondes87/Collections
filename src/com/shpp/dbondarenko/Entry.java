@@ -2,14 +2,30 @@ package com.shpp.dbondarenko;
 
 /**
  * File: Entry.java
+ * The class that implements the structure of entry of a hash map.
  * Created by Dmitro Bondarenko on 02.07.2017.
  */
 public class Entry<K, V> {
+    /**
+     * The hash code of key.
+     */
     private int hash;
+    /**
+     * The key.
+     */
     private K key;
+    /**
+     * The value.
+     */
     private V value;
+    /**
+     * The next entry.
+     */
     private Entry<K, V> next;
 
+    /**
+     * Create a entry.
+     */
     public Entry(int hash, K key, V value, Entry<K, V> next) {
         this.hash = hash;
         this.key = key;
@@ -17,12 +33,14 @@ public class Entry<K, V> {
         this.next = next;
     }
 
+    /**
+     * Return a string representation of the contents of the specified entry.
+     *
+     * @return A string representation of entry.
+     */
     @Override
     public String toString() {
-        return "{" +
-                "key=" + key +
-                ", value=" + value +
-                '}';
+        return "{" + key + ", " + value + '}';
     }
 
     @Override
@@ -53,9 +71,5 @@ public class Entry<K, V> {
 
     public Entry<K, V> getNext() {
         return next;
-    }
-
-    public void setNext(Entry<K, V> next) {
-        this.next = next;
     }
 }

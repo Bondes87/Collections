@@ -2,17 +2,35 @@ package com.shpp.dbondarenko;
 
 /**
  * File: BDSHashMap.java
+ * The class that implements the hash map structure.
  * Created by Dmitro Bondarenko on 26.06.2017.
  */
 public class BDSHashMap<K, V> {
+    /**
+     * The constant that corresponds to the initial length of the array for storing the items of the hash map.
+     */
     private static final int DEFAULT_CAPACITY = 16;
+    /**
+     * Hash map size.
+     */
     private int sizeHashMap;
+    /**
+     * An array for storing the entries of the hash map.
+     */
     private Entry<K, V>[] table;
 
+    /**
+     * Create an empty hash map.
+     */
     public BDSHashMap() {
         this(DEFAULT_CAPACITY);
     }
 
+    /**
+     * Create an empty hash map with a specified capacity.
+     *
+     * @param capacity The initial capacity for this hash map.
+     */
     public BDSHashMap(int capacity) {
         if (capacity < 0) {
             throw new IllegalArgumentException("The capacity can not be less than 0.");
@@ -21,11 +39,21 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Create a hash map containing the elements in the specified of hash map.
+     *
+     * @param bdsHashMap The hash map whose elements are to be placed into this hash map.
+     */
     public BDSHashMap(BDSHashMap<? extends K, ? extends V> bdsHashMap) {
         this(DEFAULT_CAPACITY);
         putAll(bdsHashMap);
     }
 
+    /**
+     * Return a string representation of the contents of the specified hash map.
+     *
+     * @return A string representation of hash map.
+     */
     @Override
     public String toString() {
         BDSArrayList<Entry<K, V>> bdsArrayList = new BDSArrayList<>();
@@ -39,6 +67,11 @@ public class BDSHashMap<K, V> {
         return bdsArrayList.toString();
     }
 
+    /**
+     * Return a shallow copy of this BDSHashMap instance.
+     *
+     * @return A clone of this BDSHashMap instance.
+     */
     public Object clone() {
         BDSHashMap<K, V> bdsHashMap;
         if (sizeHashMap < DEFAULT_CAPACITY) {
@@ -57,6 +90,15 @@ public class BDSHashMap<K, V> {
         return bdsHashMap;
     }
 
+    /**
+     * Associate the specified value with the specified key in this map.
+     * If the map previously contained a mapping for the key, the old value is replaced.
+     *
+     * @param key   The key with which the specified value is to be associated.
+     * @param value The value to be associated with the specified key.
+     * @return The previous value associated with key, or null if there was no mapping for key.
+     * (A null return can also indicate that the map previously associated null with key.).
+     */
     public V put(K key, V value) {
         if (key == null) {
             return putForNullKey(value);
@@ -65,10 +107,18 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Return the number of key-value mappings in this map.
+     *
+     * @return The number of key-value mappings in this map.
+     */
     public int size() {
         return sizeHashMap;
     }
 
+    /**
+     * Remove all of the mappings from this map. The map will be empty after this call returns.
+     */
     @SuppressWarnings("unchecked")
     public void clear() {
         if (sizeHashMap > 0) {
@@ -77,10 +127,21 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Return true if this map contains no key-value mappings.
+     *
+     * @return The true if this map contains no key-value mappings.
+     */
     public boolean isEmpty() {
         return sizeHashMap == 0;
     }
 
+    /**
+     * Return true if this map contains a mapping for the specified key.
+     *
+     * @param key The key whose presence in this map is to be tested.
+     * @return The true if this map contains a mapping for the specified key.
+     */
     public boolean containsKey(Object key) {
         int hash = hash(key);
         int index;
@@ -113,6 +174,12 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Return true if this map maps one or more keys to the specified value.
+     *
+     * @param value The value whose presence in this map is to be tested.
+     * @return The true if this map maps one or more keys to the specified value.
+     */
     public boolean containsValue(Object value) {
         if (value != null) {
             for (Entry<K, V> aTable : table) {
@@ -140,10 +207,27 @@ public class BDSHashMap<K, V> {
         return false;
     }
 
+    /**
+     * Return the value to which the specified key is mapped,
+     * or null if this map contains no mapping for the key.
+     *
+     * @param key The key whose associated value is to be returned.
+     * @return The value to which the specified key is mapped,
+     * or null if this map contains no mapping for the key
+     */
     public V get(Object key) {
         return getOrDefault(key, null);
     }
 
+    /**
+     * Return the value to which the specified key is mapped,
+     * or defaultValue if this map contains no mapping for the key.
+     *
+     * @param key          The key whose associated value is to be returned.
+     * @param defaultValue The default mapping of the key.
+     * @return The value to which the specified key is mapped,
+     * or defaultValue if this map contains no mapping for the key
+     */
     public V getOrDefault(Object key, V defaultValue) {
         int hash = hash(key);
         int index;
@@ -176,6 +260,13 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Copy all of the mappings from the specified map to this map.
+     * These mappings will replace any mappings that this map had for any
+     * of the keys currently in the specified map.
+     *
+     * @param bdsHashMap The mappings to be stored in this map.
+     */
     public void putAll(BDSHashMap<? extends K, ? extends V> bdsHashMap) {
         if (bdsHashMap.isEmpty()) {
             throw new NullPointerException();
@@ -188,6 +279,13 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Remove the mapping for the specified key from this map if present.
+     *
+     * @param key The key whose mapping is to be removed from the map.
+     * @return The previous value associated with key, or null if there was no mapping for key.
+     * (A null return can also indicate that the map previously associated null with key.)
+     */
     public V remove(Object key) {
         int hash = hash(key);
         int index;
@@ -220,6 +318,13 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Remove the entry for the specified key only if it is currently mapped to the specified value.
+     *
+     * @param key   The key with which the specified value is associated.
+     * @param value The value expected to be associated with the specified key.
+     * @return True if the value was removed.
+     */
     public boolean remove(Object key, Object value) {
         int hash = hash(key);
         int index;
@@ -230,9 +335,16 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Replaces the entry for the specified key only if currently mapped to the specified value.
+     *
+     * @param key      The key with which the specified value is associated.
+     * @param oldValue The value expected to be associated with the specified key.
+     * @param newValue The value to be associated with the specified key.
+     * @return True if the value was replaced.
+     */
     public boolean replace(K key, V oldValue, V newValue) {
         int hash = hash(key);
-        int index;
         if (key != null) {
             return replaceForNotNullKey(key, oldValue, newValue, hash);
         } else {
@@ -240,6 +352,15 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Replace the entry for the specified key only if it is currently mapped to some value.
+     *
+     * @param key   The key with which the specified value is associated.
+     * @param value The value to be associated with the specified key.
+     * @return The previous value associated with the specified key, or null if there was no mapping for the key.
+     * (A null return can also indicate that the map previously associated null with the key,
+     * if the implementation supports null values.).
+     */
     public V replace(K key, V value) {
         int hash = hash(key);
         int index;
@@ -276,6 +397,16 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * If the specified key is not already associated with a value (or is mapped to null)
+     * associates it with the given value and returns null, else returns the current value.
+     *
+     * @param key   The key with which the specified value is to be associated.
+     * @param value The value to be associated with the specified key.
+     * @return The previous value associated with the specified key, or null if there
+     * was no mapping for the key. (A null return can also indicate that the map previously
+     * associated null with the key, if the implementation supports null values.)
+     */
     public V putIfAbsent(K key, V value) {
         if (key == null) {
             return putIfAbsentForNullKey(value);
@@ -284,6 +415,11 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Return a BDSArrayList view of the mappings contained in this map.
+     *
+     * @return A BDSArrayList view of the mappings contained in this map.
+     */
     public BDSArrayList<Entry<K, V>> entryBDSArrayList() {
         BDSArrayList<Entry<K, V>> bdsArrayList = new BDSArrayList<>();
         for (Entry<K, V> entry : table) {
@@ -296,6 +432,11 @@ public class BDSHashMap<K, V> {
         return bdsArrayList;
     }
 
+    /**
+     * Returns a BDSArrayList view of the keys contained in this map.
+     *
+     * @return A BDSArrayList view of the keys contained in this map.
+     */
     public BDSArrayList<K> keyBDSArrayList() {
         BDSArrayList<K> bdsArrayList = new BDSArrayList<>();
         for (Entry<K, V> entry : table) {
@@ -308,6 +449,11 @@ public class BDSHashMap<K, V> {
         return bdsArrayList;
     }
 
+    /**
+     * Returns a BDSArrayList view of the values contained in this map.
+     *
+     * @return A BDSArrayList view of the values contained in this map.
+     */
     public BDSArrayList<V> values() {
         BDSArrayList<V> bdsArrayList = new BDSArrayList<>();
         for (Entry<K, V> entry : table) {
@@ -320,6 +466,18 @@ public class BDSHashMap<K, V> {
         return bdsArrayList;
     }
 
+
+    /**
+     * If the specified key is not already associated with a value (or is mapped to null)
+     * associates it with the given value and returns null, else returns the current value.
+     * (The key is not null)
+     *
+     * @param key   The key with which the specified value is to be associated.
+     * @param value The value to be associated with the specified key.
+     * @return The previous value associated with the specified key, or null if there
+     * was no mapping for the key. (A null return can also indicate that the map previously
+     * associated null with the key, if the implementation supports null values.)
+     */
     private V putIfAbsentForNotNullKey(K key, V value) {
         if (sizeHashMap < table.length) {
             return addEntryIfAbsent(key, value);
@@ -329,6 +487,17 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * If the specified key is not already associated with a value (or is mapped to null)
+     * associates it with the given value and returns null, else returns the current value.
+     * (The key is not null)
+     *
+     * @param key   The key with which the specified value is to be associated.
+     * @param value The value to be associated with the specified key.
+     * @return The previous value associated with the specified key, or null if there
+     * was no mapping for the key. (A null return can also indicate that the map previously
+     * associated null with the key, if the implementation supports null values.)
+     */
     private V addEntryIfAbsent(K key, V value) {
         int hash = hash(key);
         int index = getIndexForTable(hash, table.length);
@@ -349,6 +518,16 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * If the specified key is not already associated with a value (or is mapped to null)
+     * associates it with the given value and returns null, else returns the current value.
+     * (The key is null)
+     *
+     * @param value The value to be associated with the specified key.
+     * @return The previous value associated with the specified key, or null if there
+     * was no mapping for the key. (A null return can also indicate that the map previously
+     * associated null with the key, if the implementation supports null values.)
+     */
     private V putIfAbsentForNullKey(V value) {
         int hash = hash(null);
         int index = 0;
@@ -369,8 +548,16 @@ public class BDSHashMap<K, V> {
         }
     }
 
-    private boolean replaceForNullKey(V oldValue, V newValue, Entry<K, V> kvEntry) {
-        Entry<K, V> entry = kvEntry;
+    /**
+     * Replaces the entry for the specified key only if currently mapped to the specified value.
+     * (The key is null)
+     *
+     * @param oldValue The value expected to be associated with the specified key.
+     * @param newValue The value to be associated with the specified key.
+     * @param entry    The entry where the null key can be stored.
+     * @return True if the value was replaced.
+     */
+    private boolean replaceForNullKey(V oldValue, V newValue, Entry<K, V> entry) {
         if (entry != null) {
             if (oldValue != null) {
                 do {
@@ -393,6 +580,16 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Replaces the entry for the specified key only if currently mapped to the specified value.
+     * (The key is not null)
+     *
+     * @param key      The key with which the specified value is associated.
+     * @param oldValue The value expected to be associated with the specified key.
+     * @param newValue The value to be associated with the specified key.
+     * @param hash     The hash key code.
+     * @return True if the value was replaced.
+     */
     private boolean replaceForNotNullKey(K key, V oldValue, V newValue, int hash) {
         int index;
         index = getIndexForTable(hash, table.length);
@@ -419,6 +616,14 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Remove the entry for the specified key only if it is currently mapped to the specified value.
+     * (The key is null)
+     *
+     * @param value The value expected to be associated with the specified key.
+     * @param hash  The hash key code.
+     * @return True if the value was removed.
+     */
     private boolean removeForNullKey(Object value, int hash) {
         Entry<K, V> entry = table[hash];
         if (entry != null) {
@@ -443,6 +648,15 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Remove the entry for the specified key only if it is currently mapped to the specified value.
+     * (The key is not null)
+     *
+     * @param key   The key with which the specified value is associated.
+     * @param value The value expected to be associated with the specified key.
+     * @param hash  The hash key code.
+     * @return True if the value was removed.
+     */
     private boolean removeForNotNullKey(Object key, Object value, int hash) {
         int index = getIndexForTable(hash, table.length);
         Entry<K, V> entry = table[index];
@@ -468,6 +682,14 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Remove the mapping for the specified key from this map.
+     *
+     * @param index The index of the cell of the array where this entry can be found.
+     * @param entry The entry that can be deleted.
+     * @return The previous value associated with key.(A null return can also indicate
+     * that the map previously associated null with key.)
+     */
     private V removeEntry(int index, Entry<K, V> entry) {
         Entry<K, V> nextEntry = entry.getNext();
         if (nextEntry == null) {
@@ -483,6 +705,15 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Associate the specified value with the specified key in this map.
+     * If the map previously contained a mapping for the key, the old value is replaced.
+     * (The key is null)
+     *
+     * @param value The value to be associated with the specified key.
+     * @return The previous value associated with key, or null if there was no mapping for key.
+     * (A null return can also indicate that the map previously associated null with key.).
+     */
     private V putForNullKey(V value) {
         int hash = hash(null);
         int index = 0;
@@ -505,6 +736,16 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Associate the specified value with the specified key in this map.
+     * If the map previously contained a mapping for the key, the old value is replaced.
+     * (The key is not null)
+     *
+     * @param key   The key with which the specified value is to be associated.
+     * @param value The value to be associated with the specified key.
+     * @return The previous value associated with key, or null if there was no mapping for key.
+     * (A null return can also indicate that the map previously associated null with key.).
+     */
     private V putForNotNullKey(K key, V value) {
         if (sizeHashMap < table.length) {
             return addEntry(key, value, table);
@@ -514,12 +755,15 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Increase the capacity of the array in which the map entries are stored.
+     */
     @SuppressWarnings("unchecked")
     private void increaseSizeOfTable() {
         sizeHashMap = 0;
         Entry<K, V>[] newTable = new Entry[table.length * 2];
-        for (int i = 0; i < table.length; i++) {
-            Entry<K, V> entry = table[i];
+        for (Entry<K, V> aTable : table) {
+            Entry<K, V> entry = aTable;
             if (entry != null) {
                 addEntry(entry.getKey(), entry.getValue(), newTable);
                 while ((entry = entry.getNext()) != null) {
@@ -530,6 +774,15 @@ public class BDSHashMap<K, V> {
         table = newTable;
     }
 
+    /**
+     * Add an entry to the array.
+     *
+     * @param key   The key with which the specified value is to be associated.
+     * @param value The value to be associated with the specified key.
+     * @param table The array for storing entries.
+     * @return The previous value associated with key, or null if there was no mapping for key.
+     * (A null return can also indicate that the map previously associated null with key.)
+     */
     private V addEntry(K key, V value, Entry<K, V>[] table) {
         int hash = hash(key);
         int index = getIndexForTable(hash, table.length);
@@ -552,10 +805,23 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Get the index to place an entry in the array.
+     *
+     * @param hash        The hash key code.
+     * @param tableLength The size of the array.
+     * @return The index for placing an entry in an array.
+     */
     private int getIndexForTable(int hash, int tableLength) {
         return hash & tableLength - 1;
     }
 
+    /**
+     * Get the hash key code.
+     *
+     * @param key The key for which the hash code is defined.
+     * @return The hash key code.
+     */
     private int hash(Object key) {
         if (key == null) {
             return 0;
@@ -564,6 +830,11 @@ public class BDSHashMap<K, V> {
         }
     }
 
+    /**
+     * Initialize an array.
+     *
+     * @param capacity The initial capacity of the array.
+     */
     @SuppressWarnings("unchecked")
     private void initTable(int capacity) {
         table = new Entry[capacity];
