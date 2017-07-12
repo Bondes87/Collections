@@ -299,22 +299,9 @@ public class BDSArrayList<G> {
             throw new IndexOutOfBoundsException();
         } else {
             G deletedItem = get(index);
-           /* Object[] copyElementsAfterIndex = new Object[elements.length];
-            for (int i = 0; i < elements.length; i++) {
-                if (i < index) {
-                    copyElementsAfterIndex[i] = elements[i];
-                } else if (i > index) {
-                    copyElementsAfterIndex[i - 1] = elements[i];
-                }
-            }
-            elements=copyElementsAfterIndex;*/
             if (index != sizeArrayList - 1) {
                 System.arraycopy(elements, index + 1, elements, index, sizeArrayList - index);
             }
-            /*Object[] copyElementsAfterIndex = new Object[sizeArrayList  - index];
-            System.arraycopy(elements, index + 1, copyElementsAfterIndex,
-                    0, copyElementsAfterIndex.length);
-            System.arraycopy(copyElementsAfterIndex, 0, elements, index, copyElementsAfterIndex.length);*/
             elements[sizeArrayList] = null;
             sizeArrayList--;
             return deletedItem;
